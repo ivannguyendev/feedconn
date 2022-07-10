@@ -1,10 +1,6 @@
-import DebugClass from 'debug';
+import DebugLib from "debug";
+export const Debug = (namespace: string) => DebugLib("feedconn:" + namespace);
 
-export const Debug = (nsp: string = 'app') => {
-  const debug = DebugClass(`feedconn:${nsp}`)
-  debug.enabled = true
-  return debug
-};
 
 export class StringCode {
     static encode(...args: any[]) {
