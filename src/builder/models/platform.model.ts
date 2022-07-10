@@ -1,9 +1,8 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import { Prop, ModelOptions, getModelForClass } from '@typegoose/typegoose';
 
 export type PlatformDocument = Platform & Document;
 
-@Schema({_id: false})
+@ModelOptions({ schemaOptions: { _id: false } })
 export class Platform {
   @Prop({
     type: String,
@@ -35,5 +34,4 @@ export class Platform {
   @Prop({ type: String })
   huawei?: string;
 }
-export const PlatformSchema = SchemaFactory.createForClass(Platform);
-export const PlatformModel = mongoose.model(Platform.name, PlatformSchema);
+export const PlatformModel = getModelForClass(Platform);

@@ -1,9 +1,8 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import { Prop, ModelOptions, getModelForClass } from '@typegoose/typegoose';
 
 export type ContentDocument = Content & Document;
 
-@Schema({_id: false})
+@ModelOptions({ schemaOptions: { _id: false } })
 export class Content {
   @Prop({
     type: String,
@@ -21,5 +20,4 @@ export class Content {
   fr?: string;
 }
 
-export const ContentSchema = SchemaFactory.createForClass(Content);
-export const ContentModel = mongoose.model(Content.name, ContentSchema);
+export const ContentModel = getModelForClass(Content);

@@ -1,38 +1,41 @@
-import test from "ava";
+import test from 'ava';
+import * as builder from './builder';
 
-// test(`${flaword.FlawordOptions.name} default options`, (t) => {
-//   let testOptions: flaword.FlawordOptions = {
-//     blacklist: [],
-//     whitelist: [],
-//     isEmpty: false,
-//   };
-//   const options = new flaword.FlawordOptions();
-//   t.is(options.blacklist.length, testOptions.blacklist.length);
-//   t.is(options.whitelist.length, testOptions.whitelist.length);
-//   t.is(options.isEmpty, testOptions.isEmpty);
-// });
+test(`${builder.FeedconnBuilder.name} default message`, (t) => {
+  const messagePayload = builder.FeedconnBuilder.render({
+    contents: {
+      all: 'Hello2',
+    },
+    headings: {
+      all: 'Xin chào2',
+    },
+    state: 'unread',
+    tags: ['test'],
+    collapse: 'test',
+    userId: 'whthduck',
+  });
+  t.is(messagePayload.contents.all, 'Hello2', 'default contents of message');
+  t.is(messagePayload.state, 'unread', 'default state message');
+  t.is(messagePayload.tags[0], 'test', 'with tags');
+});
 
-// test(`${flaword.Flaword.check.name} detect sleep syntax`, (t) => {
-//   const flawCheck = flaword.Flaword.check({
-//     fields: "_id",
-//     populate: ";+sleep(3000);+var+x=",
-//     filter: {},
-//     sort: "-updatedAt",
-//     skip: 0,
-//     limit: 1,
-//   });
-//   t.is(flawCheck.isFlaw, true);
-//   t.is(flawCheck.key, "populate");
-// });
-
-// test(`${flaword.Flaword.check.name} fresh request`, (t) => {
-//   const flawCheck = flaword.Flaword.check({
-//     fields: "_id",
-//     populate: "",
-//     filter: {},
-//     sort: "-updatedAt",
-//     skip: 0,
-//     limit: 1,
-//   });
-//   t.is(flawCheck.isFlaw, false);
-// });
+test(`${builder.FeedconnBuilder.name} data message`, (t) => {
+  const messagePayload = builder.FeedconnBuilder.render({
+    contents: {
+      all: 'Hello2',
+    },
+    headings: {
+      all: 'Xin chào2',
+    },
+    state: 'unread',
+    tags: ['test'],
+    collapse: 'test',
+    userId: 'whthduck',
+    data: {
+      test: true,
+    },
+  });
+  t.not(messagePayload.data, null, 'data fields not null');
+  t.not(messagePayload.data, undefined, 'data fields not undefined');
+  t.is(typeof messagePayload.data, 'object', 'data fields is object');
+});

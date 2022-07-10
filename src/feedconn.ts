@@ -1,25 +1,32 @@
 import { FeedconnConfig } from './config';
 import * as admin from 'firebase-admin';
 import { FeedconnBuilder } from './builder/builder';
+import { Message } from './builder';
 
 export class Feedconn {
   private adminApp: admin.app.App;
-  constructor(config: FeedconnConfig) {
-    if (config) {
-      this.adminApp = admin.initializeApp(config, config.app);
+  constructor(app?: admin.app.App) {
+    if (app) {
+      this.adminApp = app;
     }
   }
 
-  loadApp(config: FeedconnConfig) {
-    if (!config) throw new Error('Missing config args');
-    this.adminApp = admin.initializeApp(config, config.app);
-    return this.adminApp;
-  }
-
-  assert() {
+  private assert() {
     if (!this.adminApp) {
       throw new Error('Firebase instance is undefined.');
     }
+  }
+
+  loadByConfig(config: FeedconnConfig) {
+    if (!config) throw new Error('Missing config args');
+    this.adminApp = admin.initializeApp(
+      {
+        credential: admin.credential.cert(config.credential),
+        databaseURL: config.databaseURL,
+      },
+      config.app,
+    );
+    return this;
   }
 
   get database() {
@@ -27,10 +34,11 @@ export class Feedconn {
     return this.adminApp.database();
   }
 
-  async send(userId, message) {
+  async send(userId, message: Partial<Message>) {
     const db = this.database;
-    const payload = FeedconnBuilder.render(message);
+    const payload = FeedconnBuilder.render({ ...message, userId });
     const messageRef = db.ref('messages').child(userId);
-    return messageRef.child(String(payload._id)).set(payload);
+    await messageRef.child(String(payload._id)).set(payload);
+    return payload;
   }
 }

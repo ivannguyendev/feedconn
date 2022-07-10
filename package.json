@@ -1,6 +1,6 @@
 {
-  "name": "feedconn",
-  "version": "0.0.1",
+  "name": "@whthduck/feedconn",
+  "version": "0.0.2",
   "description": "A feed library connector by firebase database",
   "homepage": "https://github.com/whthduck/feedconn#readme",
   "main": "dist/index.js",
@@ -15,7 +15,9 @@
     "clean": "rimraf dist *tsbuildinfo",
     "build": "APP_VERSION=$npm_package_version rimraf dist *tsbuildinfo && tsc --build",
     "build:docker": "tsc --build",
-    "test": "ava"
+    "test": "yarn build && ava reset-cache && ava",
+    "test:docker": "yarn build:docker && ava reset-cache && ava"
+
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
@@ -26,15 +28,14 @@
     "url": "git@github.com:whthduck/feedconn.git"
   },
   "keywords": [
-    "SQL injection",
-    "NoSQL injection",
-    "harmful",
-    "validation",
-    "Javascript injection",
+    "feeds",
+    "firebase",
+    "realtime",
+    "javascript",
     "nodejs"
   ],
   "dependencies": {
-    "@nestjs/mongoose": "^9.2.0",
+    "@typegoose/typegoose": "^9.10.1",
     "debug": "^4.3.4",
     "firebase-admin": "^11.0.0",
     "lodash": "^4.17.21",

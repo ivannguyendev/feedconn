@@ -1,5 +1,6 @@
-import { AppOptions } from 'firebase-admin';
+import { AppOptions, ServiceAccount } from 'firebase-admin';
 
-export type FeedconnConfig = AppOptions & {
+export type FeedconnConfig = Omit<AppOptions, 'credential'> & {
   app: string;
+  credential: string | ServiceAccount;
 };

@@ -1,12 +1,20 @@
-import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import {
+  Prop,
+  ModelOptions,
+  getModelForClass,
+  Severity,
+} from '@typegoose/typegoose';
+import { Schema } from 'mongoose';
 import { Button } from './button.model';
-import { Content, ContentSchema } from './content.model';
-import { Platform, PlatformSchema } from './platform.model';
+import { Content } from './content.model';
+import { Platform } from './platform.model';
 
 export type MessageDocument = Message & Document;
 
-@Schema()
+@ModelOptions({
+  schemaOptions: { _id: true, timestamps: true },
+  options: { allowMixed: Severity.ALLOW },
+})
 export class Message {
   @Prop({ type: String, required: true })
   userId: string;
@@ -14,27 +22,25 @@ export class Message {
   state: 'unread' | 'read';
   @Prop({ required: true })
   collapse: string;
-  @Prop({ type: ContentSchema, required: true, default: () => ({ all: '' }) })
+  @Prop({ required: true })
   contents: Content;
-  @Prop({ type: ContentSchema, required: true, default: () => ({ all: '' }) })
+  @Prop({ required: true })
   headings: Content;
-  @Prop({ type: ContentSchema })
+  @Prop()
   subtitle: Content;
   @Prop()
   template: string;
-  @Prop(raw({}))
+  @Prop({ type: () => Schema.Types.Mixed, default: {} })
   data: Record<string, any>;
-  @Prop({ type: PlatformSchema })
+  @Prop()
   url: Platform;
-  @Prop({ type: PlatformSchema })
+  @Prop()
   image: Platform;
-  @Prop([])
+  @Prop()
   buttons: Button[] | Button[][];
-  @Prop({ type: PlatformSchema })
+  @Prop()
   sound: Platform;
-  @Prop([String])
+  @Prop({ type: () => [String] })
   tags: string[];
 }
-
-export const MessageSchema = SchemaFactory.createForClass(Message);
-export const MessageModel = mongoose.model(Message.name, MessageSchema);
+export const MessageModel = getModelForClass(Message);
