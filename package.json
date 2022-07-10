@@ -13,11 +13,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist *tsbuildinfo",
-    "build": "APP_VERSION=$npm_package_version rimraf dist *tsbuildinfo && tsc --build",
-    "build:docker": "tsc --build",
-    "test": "yarn build && ava reset-cache && ava",
-    "test:docker": "yarn build:docker && ava reset-cache && ava"
-
+    "build": "APP_VERSION=$npm_package_version yarn clean && tsc --project tsconfig.build.json",
+    "build:docker": "tsc --project tsconfig.build.json",
+    "test": "yarn clean && tsc --build && ava reset-cache && ava"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",

@@ -6,6 +6,9 @@
     "test",
     "dist",
     "**/*spec.ts",
-    "**/*test.ts"
-  ]
+    "**/*test.ts",
+    "**/*spec.js",
+    "**/*test.js",
+  ],
+
 }
