@@ -43,4 +43,4 @@ const feedconnApp = new Feedconn().loadByConfig({
 - [OneSignal](https://onesignal.com/)  is the fastest and most reliable service to send push notifications, in-app messages, SMS, and emails.
 
 ## License
-[MIT](https://github.com/whthduck/flaword/blob/main/LICENSE)
+[MIT](https://github.com/whthduck/feedconn/blob/main/LICENSE)
