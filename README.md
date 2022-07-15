@@ -21,7 +21,7 @@ Create /cert folder => copy credentials from firebase => paste into /cert folder
 
 After that, use middleware like the source code below or follow the [example](https://github.com/whthduck/feedconn/tree/main/example)
 ``` javascript
-const feedconnApp = new Feedconn().loadByConfig({
+const feedconnApp = new Feedconn().loadConfig({
 	app: 'app',
 	credential: {
 		...credential,

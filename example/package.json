@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "Only example app",
   "scripts": {
-    "clean": "rimraf dist *tsbuildinfo",
     "start": "DEBUG=* node index"
   },
   "dependencies": {

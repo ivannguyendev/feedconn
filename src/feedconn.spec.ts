@@ -1,10 +1,10 @@
 import test, { ExecutionContext } from 'ava';
 import * as feedconn from './feedconn';
-import * as credential from './cert/cert.json';
-import * as database from './cert/database.json';
+import * as credential from './../cert.json';
+import * as database from './../database.json';
 
 test.before('Init feedconn app', (t: ExecutionContext<any>) => {
-  const feedconnApp = new feedconn.Feedconn().loadByConfig({
+  const feedconnApp = new feedconn.Feedconn().loadConfig({
     app: 'app',
     credential: {
       ...credential,

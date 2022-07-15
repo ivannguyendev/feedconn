@@ -1,8 +1,8 @@
 const express = require('express');
 const { Feedconn } = require('../dist');
-const credential = require('../dist/cert/cert.json');
-const database = require('../dist/cert/database.json');
-const messageExample = require('../dist/cert/data.json');
+const credential = require('../cert.json');
+const database = require('../database.json');
+const messageExample = require('../data.json');
 
 process.on('uncaughtException', function (err) {
   console.info('*** DEBUG uncaughtException ***');
@@ -10,7 +10,7 @@ process.on('uncaughtException', function (err) {
 });
 
 const app = express();
-const feedconnApp = new Feedconn().loadByConfig({
+const feedconnApp = new Feedconn().loadConfig({
   app: 'app',
   credential: {
     ...credential,
@@ -38,5 +38,7 @@ app.use((err, req, res, next) => {
     res.status(err.code || 400).send({ ...err, message: err.message });
   }
 });
+
+feedconnApp.setTag('123','abc','456')
 
 app.listen(3000);

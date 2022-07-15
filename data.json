@@ -1,0 +1,24 @@
+{
+  "message1": {
+    "contents": {
+      "all": "Hello"
+    },
+    "headings": {
+      "all": "Xin chào"
+    },
+    "state": "unread",
+    "tags": ["test"],
+    "collapse": "test"
+  },
+  "message2": {
+    "contents": {
+      "all": "Hello2"
+    },
+    "headings": {
+      "all": "Xin chào2"
+    },
+    "state": "unread",
+    "tags": ["test"],
+    "collapse": "test"
+  }
+}

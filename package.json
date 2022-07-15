@@ -33,11 +33,10 @@
     "nodejs"
   ],
   "dependencies": {
-    "@typegoose/typegoose": "^9.10.1",
+    "@whthduck/feed-builder": "^0.0.3",
     "debug": "^4.3.4",
     "firebase-admin": "^11.0.0",
-    "lodash": "^4.17.21",
-    "mongoose": "^6.4.4"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@ava/typescript": "^3.0.1",
