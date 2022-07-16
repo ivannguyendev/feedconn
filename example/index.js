@@ -24,7 +24,7 @@ const feedconnApp = new Feedconn().loadConfig({
 app.route('/:key').post(async function (req, res, next) {
   try {
     const result = await feedconnApp.send(
-      'whthduck',
+      'user1',
       messageExample[req.params.key],
     );
     res.status(200).json(result);
@@ -39,6 +39,8 @@ app.use((err, req, res, next) => {
   }
 });
 
-feedconnApp.setTag('123','abc','456')
+setInterval(() => {
+  feedconnApp.prune({ minDate: Date.now() - 1000 * 60 });
+}, 10 * 1000);
 
 app.listen(3000);
