@@ -1,8 +1,10 @@
 const express = require('express');
 const { Feedconn } = require('../dist');
-const credential = require(process.env.FIREBASE_CERT || './cert/cert.json');
-const database = require(process.env.FIREBASE_DATABASE || './cert/database.json');
-const messageExample = require('../data.json');
+const credential = require(process.env.FIREBASE_CERT ||
+  './cert/cert.default.json');
+const database = require(process.env.FIREBASE_DATABASE ||
+  './cert/database.default.json');
+const messageExample = require('./cert/data.default.json');
 
 process.on('uncaughtException', function (err) {
   console.info('*** DEBUG uncaughtException ***');
