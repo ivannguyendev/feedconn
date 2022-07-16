@@ -140,5 +140,5 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-*cert*
-*database*
+*cert.json
+*database.json

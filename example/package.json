@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Only example app",
   "scripts": {
-    "start": "DEBUG=* node index"
+    "start": "DEBUG=* FIREBASE_CERT=../cert.json FIREBASE_DATABASE=../database.json node index"
   },
   "dependencies": {
     "express": "^4.18.1"
