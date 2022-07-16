@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "@whthduck/feed-builder": "^0.0.3",
-    "debug": "^4.3.4",
+    "debug": "4.3.4",
     "firebase-admin": "^11.0.0"
   },
   "devDependencies": {
