@@ -30,6 +30,7 @@
     "firebase",
     "realtime",
     "javascript",
+    "typescript",
     "nodejs"
   ],
   "dependencies": {
