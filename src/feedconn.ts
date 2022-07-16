@@ -9,6 +9,7 @@ import { Base } from './Base';
 import { Debug } from './utils';
 
 const debug = Debug('Feedconn');
+
 export class Feedconn extends Base {
   feeds: Feed;
   timeFeeds: TimeFeed;

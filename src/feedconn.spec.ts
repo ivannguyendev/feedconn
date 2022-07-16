@@ -1,5 +1,5 @@
 import test, { ExecutionContext } from 'ava';
-import * as feedconn from './Feedconn';
+import * as feedconn from './feedconn';
 import * as credential from './../cert.json';
 import * as database from './../database.json';
 
