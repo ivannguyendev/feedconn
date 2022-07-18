@@ -16,12 +16,13 @@ export class TagFeed extends Base {
   async add(userId: string, feedId: string, key: string) {
     const path = `${userId}/${key}/${feedId}`;
     await this.tagfeedRef.child(path).set(true);
-    await this.logFeed.add(this.tagfeedRef.key, feedId + key, path);
+    await this.logFeed.add(this.tagfeedRef.key, userId, feedId + key, path);
   }
 
-  async remove(feedId: string, key: string = '') {
+  async remove(userId: string, feedId: string, key: string = '') {
     const snapshot = await this.logFeed.searchByKey(
       this.tagfeedRef.key,
+      userId,
       feedId + key,
     );
 
@@ -30,7 +31,7 @@ export class TagFeed extends Base {
       this.tagfeedRef
         .child(logData.path)
         .remove()
-        .then(() => this.logFeed.remove(this.tagfeedRef.key, data.key));
+        .then(() => this.logFeed.remove(this.tagfeedRef.key, userId, data.key));
     });
   }
 

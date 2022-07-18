@@ -34,7 +34,7 @@
     "nodejs"
   ],
   "dependencies": {
-    "@whthduck/feed-builder": "^0.0.4",
+    "@whthduck/feed-builder": "^0.0.5",
     "debug": "4.3.4",
     "firebase-admin": "^11.0.0"
   },

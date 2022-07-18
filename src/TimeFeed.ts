@@ -21,17 +21,23 @@ export class TimeFeed extends Base {
 
   async add(userId: string, feedId: string, time: number | Date) {
     const timeFeed = {
-      path: `${userId}/${feedId}`,
+      userId: userId,
+      feedId: feedId,
       createdAt: Math.floor(new Date(time).getTime() / 1000),
     };
-    await this.timefeedRef.child(feedId).set(timeFeed);
-    await this.logFeed.add(this.timefeedRef.key, feedId, feedId);
+    const path = `${userId}${feedId}`;
+    await this.timefeedRef.child(path).set(timeFeed);
+    await this.logFeed.add(this.timefeedRef.key, userId, feedId, path);
   }
 
-  async remove(feedId: string) {
-    const logData = await this.logFeed.find(this.timefeedRef.key, feedId);
+  async remove(userId: string, feedId: string) {
+    const logData = await this.logFeed.find(
+      this.timefeedRef.key,
+      userId,
+      feedId,
+    );
     await this.timefeedRef.child(logData.path).remove();
-    await this.logFeed.remove(this.timefeedRef.key, feedId);
+    await this.logFeed.remove(this.timefeedRef.key, userId, feedId);
   }
 
   async searchOldFeed(

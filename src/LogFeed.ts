@@ -10,32 +10,38 @@ export class LogFeed extends Base {
     this.logfeedRef = this.database.ref('log-feeds');
   }
 
-  async add(ref: string, feedId: string, path: string) {
-    const logId = `${ref}/${feedId}`;
+  async add(ref: string, userId: string, feedId: string, path: string) {
+    const logId = `${ref}/${userId}/${feedId}`;
     await this.logfeedRef.child(logId).set({
       ref,
       path,
     });
   }
 
-  async find(ref: string, feedId: string): Promise<{ ref; path }> {
-    const logId = `${ref}/${feedId}`;
+  async find(
+    ref: string,
+    userId: string,
+    feedId: string,
+  ): Promise<{ ref; path }> {
+    const logId = `${ref}/${userId}/${feedId}`;
     const snapshot = await this.logfeedRef.child(logId).get();
     return snapshot.val();
   }
 
-  async remove(ref: string, feedId: string) {
-    const logId = `${ref}/${feedId}`;
+  async remove(ref: string, userId: string, feedId: string) {
+    const logId = `${ref}/${userId}/${feedId}`;
     await this.logfeedRef.child(logId).remove();
   }
 
   async searchByKey(
     ref: string,
+    userId: string,
     key: string = '',
     callback?: (err, snapshot: DataSnapshot) => void,
   ) {
     const datastream = await this.logfeedRef
       .child(ref)
+      .child(userId)
       .orderByKey()
       .startAt(key);
 

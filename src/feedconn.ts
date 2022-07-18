@@ -72,10 +72,10 @@ export class Feedconn extends Base {
     return this;
   }
 
-  async setReadUser(userId: string) {
+  async setAllRead(userId: string) {
     const snapshot = await this.tagFeeds.searchByKey(userId, 'unread');
     snapshot.forEach((data) => {
-      this.feeds.setReadState(data.key);
+      this.feeds.setReadState(userId, data.key);
     });
   }
 
@@ -93,16 +93,17 @@ export class Feedconn extends Base {
     return feedMessage;
   }
 
-  async remove(feedId: string) {
-    await this.feeds.remove(feedId);
-    await this.timeFeeds.remove(feedId);
-    await this.tagFeeds.remove(feedId);
+  async remove(userId: string, feedId: string) {
+    await this.feeds.remove(userId, feedId);
+    await this.timeFeeds.remove(userId, feedId);
+    await this.tagFeeds.remove(userId, feedId);
   }
 
   async prune(options: { minDate: Date | number }) {
     const snapshot = await this.timeFeeds.searchOldFeed(options);
-    snapshot.forEach((data) => {
-      this.remove(data.key);
+    snapshot.forEach((dataSnapshot) => {
+      const data = dataSnapshot.val();
+      this.remove(data.userId, data.feedId);
     });
   }
 }
