@@ -42,6 +42,7 @@ export class Feed extends Base {
   async setReadState(feedId: string) {
     const logData = await this.logFeed.find(this.feedRef.key, feedId);
     await this.feedRef.child(logData.path).update({
+      count: 0,
       state: 'read',
     });
     await this.tagFeed.remove(feedId, 'unread');
