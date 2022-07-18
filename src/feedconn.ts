@@ -96,7 +96,7 @@ export class Feedconn extends Base {
   async remove(userId: string, feedId: string) {
     await this.feeds.remove(userId, feedId);
     await this.timeFeeds.remove(userId, feedId);
-    await this.tagFeeds.remove(userId, feedId);
+    await this.tagFeeds.remove(userId, feedId, null);
   }
 
   async prune(options: { minDate: Date | number }) {
