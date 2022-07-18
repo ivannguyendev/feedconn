@@ -45,7 +45,7 @@ export class Feed extends Base {
       count: 0,
       state: 'read',
     });
-    await this.tagFeed.remove(feedId, 'unread');
+    await this.tagFeed.remove(userId,feedId, 'unread');
     return true;
   }
 }

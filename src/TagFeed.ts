@@ -19,7 +19,8 @@ export class TagFeed extends Base {
     await this.logFeed.add(this.tagfeedRef.key, userId, feedId + key, path);
   }
 
-  async remove(userId: string, feedId: string, key: string = '') {
+  async remove(userId: string, feedId: string, key: string) {
+    key = key || ''
     const snapshot = await this.logFeed.searchByKey(
       this.tagfeedRef.key,
       userId,
