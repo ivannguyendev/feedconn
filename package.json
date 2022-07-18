@@ -1,6 +1,6 @@
 {
   "name": "@whthduck/feedconn",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A feed library connector by firebase database",
   "homepage": "https://github.com/whthduck/feedconn#readme",
   "main": "dist/index.js",
