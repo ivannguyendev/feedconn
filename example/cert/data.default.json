@@ -8,7 +8,8 @@
     },
     "state": "unread",
     "tags": ["test"],
-    "collapse": "test"
+    "collapse": "test",
+    "user": { "_id": "59fa8acbbe7358fff44ed126" }
   },
   "message2": {
     "contents": {
@@ -19,6 +20,7 @@
     },
     "state": "unread",
     "tags": ["test"],
-    "collapse": "test"
+    "collapse": "test",
+    "user": { "_id": "59fa8acbbe7358fff44ed126" }
   }
 }
