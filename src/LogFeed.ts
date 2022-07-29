@@ -43,7 +43,7 @@ export class LogFeed extends Base {
       .child(ref)
       .child(userId)
       .orderByKey()
-      .startAt(key);
+      .equalTo(key);
 
     if (typeof callback === 'function') {
       datastream.once(
